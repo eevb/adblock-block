@@ -28,3 +28,30 @@ function checkHiddenElement() {
 }
 
 setInterval(checkHiddenElement, 100);
+
+
+
+// ---------------------------------
+
+// Event listener for the keydown event
+document.addEventListener('keydown', function(event) {
+  // Check if the pressed key is F12 (key code 123)
+  if (event.keyCode === 123) {
+
+    event.preventDefault();
+  }
+});
+
+
+document.addEventListener('contextmenu', function(event) {
+
+  event.preventDefault();
+});
+
+document.addEventListener('keydown', function(event) {
+  // Check if the pressed keys are Ctrl+Shift+I (key codes 17, 16, 73)
+  if (event.ctrlKey && event.shiftKey && event.keyCode === 73) {
+
+    event.preventDefault();
+  }
+});
