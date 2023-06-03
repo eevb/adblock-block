@@ -1,30 +1,29 @@
 var existingElement = null;
 
 function checkHiddenElement() {
-  var elements = document.querySelectorAll('[class^="63"]');
+  var elements = document.querySelectorAll('[class^="64"]');
   
-  if (existingElement && getComputedStyle(existingElement).display === 'none') {
+  // Check if the existing element exists in the DOM and is hidden
+  if (existingElement && (existingElement.parentNode === null || getComputedStyle(existingElement).display === 'none')) {
     existingElement.remove();
     existingElement = null;
   }
   
+  // Check if there is no existing element
   if (!existingElement) {
     var newElement = document.createElement('div');
-    var randomClass = '63-' + Math.floor(Math.random() * 1000);
+    var randomClass = '64-' + Math.floor(Math.random() * 1000); // Change the range as needed
     
     newElement.className = randomClass;
     newElement.textContent = 'block me with ublock origin';
     document.body.appendChild(newElement);
     existingElement = newElement;
-    
-    // Add an event listener to detect changes in the element
-    newElement.addEventListener('DOMSubtreeModified', function() {
-      // If the element is modified, add a new element
-      if (existingElement === newElement) {
-        existingElement = null; // Reset the existing element variable
-      }
-    });
   }
 }
 
-setInterval(checkHiddenElement, 100);
+// Observe changes to the document using MutationObserver
+var observer = new MutationObserver(checkHiddenElement);
+observer.observe(document.documentElement, { childList: true, subtree: true });
+
+// Call the checkHiddenElement function initially
+checkHiddenElement();
