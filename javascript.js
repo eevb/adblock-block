@@ -1,7 +1,7 @@
 var existingElement = null;
 
 function checkHiddenElement() {
-  var elements = document.querySelectorAll('[class^="65"]');
+  var elements = document.querySelectorAll('[class^="45"]');
   
   if (existingElement && getComputedStyle(existingElement).display === 'none') {
     existingElement.remove();
@@ -10,7 +10,7 @@ function checkHiddenElement() {
   
   if (!existingElement) {
     var newElement = document.createElement('div');
-    var randomClass = '65-' + Math.floor(Math.random() * 1000);
+    var randomClass = '45-' + Math.floor(Math.random() * 1000);
     
     newElement.className = randomClass;
     newElement.textContent = 'block me with ublock origin';
